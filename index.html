@@ -1,0 +1,51 @@
+<html>  
+<html ng-app="productApp">
+    <link href="css/style.css" rel="stylesheet"/>  
+    <link href="assets/css/owl.carousel.css" rel="stylesheet"/>  
+    <link href="assets/css/owl.theme.css" rel="stylesheet"/>  
+  
+    <script src="assets/js/jquery-1.9.1.min.js"></script>  
+    <script src="assets/js/owl.carousel.js"></script>  
+    <script src="assets/js/angular.min.js"></script>
+</head>  
+<body ng-controller="OwlCtrl">
+
+<wrap-owlcarousel class="owl-carousel" 
+    data-options="{autoPlay: 5000, stopOnHover: true,  
+        slideSpeed : 300, paginationSpeed : 400}">
+</wrap-owlcarousel>
+</body>  
+</html>
+<script>
+var productApp = angular.module('productApp',[]);
+
+productApp.controller('OwlCtrl', function($scope,$rootScope,$timeout){
+
+	$scope.slider = [{ img: 'assets/img/1.jpg' },{ img: 'assets/img/2.jpg' },{ img: 'assets/img/3.jpg'}];
+	var tmp = [];
+	for(var i=0; i <= 20; i++){
+
+		var item = $scope.slider[Math.floor(Math.random() * 3)];
+		// index used to avoid element duplicate error
+		tmp.push({ img: item.img, index: i });
+		// push random ordered images
+	}
+	$scope.slider = tmp;
+	$timeout(function(){ $rootScope.element.owlCarousel($rootScope.options); },100);
+
+});
+productApp.directive('wrapOwlcarousel', function ($timeout,$rootScope) {
+
+    return {
+        restrict: 'E',
+        link: function (scope, element, attrs) {
+			console.log(element);
+			console.log(attrs);
+            var options = scope.$eval($(element).attr('data-options'));
+            $rootScope.options = options;
+            $rootScope.element = $(element);
+        },
+        templateUrl: 'slide.html'
+    };
+});
+</script>
