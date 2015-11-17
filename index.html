@@ -1,6 +1,5 @@
 <html>  
 <html ng-app="productApp">
-    <link href="css/style.css" rel="stylesheet"/>  
     <link href="assets/css/owl.carousel.css" rel="stylesheet"/>  
     <link href="assets/css/owl.theme.css" rel="stylesheet"/>  
   
@@ -31,7 +30,7 @@ productApp.controller('OwlCtrl', function($scope,$rootScope,$timeout){
 		// push random ordered images
 	}
 	$scope.slider = tmp;
-	$timeout(function(){ $rootScope.element.owlCarousel($rootScope.options); },100);
+	$timeout(function(){ $rootScope.element.owlCarousel($rootScope.options); },1000);
 
 });
 productApp.directive('wrapOwlcarousel', function ($timeout,$rootScope) {
